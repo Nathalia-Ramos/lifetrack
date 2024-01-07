@@ -4,6 +4,6 @@ import AuthController from "../controllers/auth_controller.js";
 
 const authRouter = Router();
 
-authRouter.post("/auth", AuthMiddleware.validateAuthBody, AuthController.auth);
+authRouter.post("/auth/", AuthMiddleware.validateAuthBody, AuthController.auth);
 
 export default authRouter;
