@@ -1,5 +1,5 @@
-import bcrypt from "bcrypt";
 import JWT_UTILS from "../utils/jwt_utils.js";
+import bcrypt from "bcrypt";
 import AuthModel from "../models/auth_model.js";
 
 const AuthController = {
@@ -9,6 +9,8 @@ const AuthController = {
             const { mail, pass } = req.body;
 
             const user = await AuthModel.getUserByMail(mail);
+
+            if(!user) throw { status: 404, message: "Usuário não encontrado."  };
 
             const findedUser = await AuthModel.getUserByMail(mail, user[0].id);
 
