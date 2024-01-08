@@ -8,13 +8,10 @@ const UserController = {
             const { full_name, mail, pass, confirm_pass,  goal } = req.body;
     
             if(!full_name || full_name === "") throw { status: 400, message: "O campo 'full_name' é obrigatório e não pode ser vazio." };
+            if(!mail || mail === "") throw { status: 400, message: "O campo 'mail' é obrigatório e não pode ser vazio." };  
             
-            if(mail){
-                if(!mail || mail === "") throw { status: 400, message: "O campo 'mail' é obrigatório e não pode ser vazio." };  
-                
-                const mailExistVerify = await UserModel.getUserByMail(mail);
-                if(mailExistVerify.length) throw { status: 409, message: "O email já existe em nosso sistema." };
-            }
+            const mailExistVerify = await UserModel.getUserByMail(mail);
+            if(mailExistVerify.length) throw { status: 409, message: "O email já existe em nosso sistema." };
 
             if(pass){
                 if(!pass || pass === "") throw { status: 400, message: "O campo 'pass' é obrigatório e não pode ser vazio." };  
